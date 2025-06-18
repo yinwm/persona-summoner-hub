@@ -1,0 +1,26 @@
+name: Sync to Gitee
+
+on:
+  push:
+    branches:
+      - main # 只在 main 分支被推送时触发
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync to Gitee
+        uses: Yikun/hub-mirror-action@master
+        with:
+          # 必选，需要同步的源（GitHub）仓库
+          src: 'github/yinwm'
+          # 必选，需要同步到的目标（Gitee）仓库
+          dst: 'gitee/yinwm' # 请将这里的 yinwm 替换为你的 Gitee 用户名
+          # 必选，Gitee 的私人令牌
+          dst_key: ${{ secrets.GITEE_TOKEN }}
+          # 必选，Gitee 仓库的名称
+          dst_repo_name: 'persona-summoner-hub'
+          # 可选，强制更新 Gitee 仓库
+          force_update: true
+          # 可选，设定 Gitee 用户类型
+          account_type: 'user'
